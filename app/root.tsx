@@ -8,10 +8,24 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+//import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client/index.js";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
+
+// Initialize Apollo client
+const graphQLClient = new ApolloClient({
+  ssrMode: true, // Indicates that we want to use server side rendering
+  link: createHttpLink({ // Use createHttpLink instead of uri
+    uri: 'https://countries.trevorblades.com/graphql', //Path to GraphQL schema
+    headers: {
+      'Access-Control-Allow-Origin': '*', //Cors management
+    },
+  }),
+  cache: new InMemoryCache(), // Cache management
+});
 
 export default function App() {
   return (
@@ -23,10 +37,12 @@ export default function App() {
         <Links />
       </head>
       <body>
+      <ApolloProvider client={graphQLClient}>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+      </ApolloProvider>
       </body>
     </html>
   );
