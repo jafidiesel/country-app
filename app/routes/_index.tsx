@@ -1,28 +1,29 @@
 import type { MetaFunction } from "@remix-run/node";
-//import { useQuery } from "@apollo/client";
-import { useQuery } from "@apollo/client/index.js";
-import { GET_ALL_COUNTRIES } from "~/graphql/queries";
-import { Country } from "~/graphql/__generated__/graphql";
+import { FormEvent, useState } from "react";
+import CountriesList from "~/components/CountriesList";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Country App" },
+    { name: "description", content: "Country App" },
   ];
 };
 
 export default function Index() {
-  const { loading, error, data } = useQuery(GET_ALL_COUNTRIES);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  const [value, setValue] = useState('')
+  const [searchValue, setSearchValue] = useState('')
+  const search = (e: FormEvent<HTMLFormElement>) => {
+    if(e) e.preventDefault();
+    setSearchValue(value);
+  }
 
   return (
     <div>
-      {data.countries.map((country: Country) => (
-        <div key={country.code}>
-          <h2>{country.emoji} {country.name}</h2>
-        </div>
-      ))}
+      <form onSubmit={(e: FormEvent<HTMLFormElement>) => search(e)}>
+        <input value={value} onChange={e => setValue(e.target.value)} placeholder="Enter country name"/>
+        <button type="submit">Search</button>
+      </form>
+      {!!searchValue && <CountriesList searchValue={searchValue} />}
     </div>
   );
 }

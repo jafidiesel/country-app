@@ -11,3 +11,23 @@ export const GET_ALL_COUNTRIES = gql`
     }
   }
 `;
+
+export const GET_COUNTRY_BY_NAME = (name: string) => gql`
+    query {
+        countries(filter: { name: { regex: "^${name}" } }) {
+        code
+        name
+        currency
+        }
+    }
+`;
+
+export const GET_COUNTRY_ARGENTINA = gql`
+  query {
+    countries(filter: { name: { regex: "^Argentina" } }) {
+      code
+      name
+      currency
+    }
+  }
+`;

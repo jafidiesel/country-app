@@ -10,6 +10,15 @@ import {
 } from "@remix-run/react";
 //import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client/index.js";
+import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev/index.js";
+
+if (process.env.NODE_ENV) {  // Adds messages only in a dev environment
+
+  loadDevMessages();
+
+  loadErrorMessages();
+
+}
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
