@@ -1,38 +1,17 @@
-# Welcome to Remix!
+# country-app
 
-- [Remix Docs](https://remix.run/docs)
+A simple country explorer that provide small amount of data, courtesy of [trevorblades.com](https://trevorblades.com)
 
-## Development
+# About
 
-From your terminal:
+This app it's build with:
 
-```sh
-npm run dev
-```
+    React v18+
+    tailwindcss
+    Remix
+    graphql
+    apollo
+    trevorblades API
 
-This starts your app in development mode, rebuilding assets on file changes.
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
+Thanks to: [trevorblades public graphql API](https://github.com/trevorblades/countries)

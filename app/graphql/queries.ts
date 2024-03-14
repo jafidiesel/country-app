@@ -18,7 +18,18 @@ export const GET_COUNTRY_BY_NAME = (name: string) => gql`
         code
         name
         currency
+        capital
+        states {
+          name
         }
+        subdivisions {
+          name
+        }
+        languages {
+          code
+          name
+        }
+      }
     }
 `;
 

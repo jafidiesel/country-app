@@ -1,4 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -8,9 +7,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-//import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client/index.js";
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev/index.js";
+import stylesheet from "~/tailwind.css";
 
 if (process.env.NODE_ENV) {  // Adds messages only in a dev environment
 
@@ -21,7 +20,7 @@ if (process.env.NODE_ENV) {  // Adds messages only in a dev environment
 }
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "stylesheet", href: stylesheet },
 ];
 
 // Initialize Apollo client
